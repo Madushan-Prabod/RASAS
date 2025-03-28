@@ -17,7 +17,7 @@ include 'db.php';
             width: 100%;
 
             display: grid;
-            grid-template-rows: 100px 1fr 50px;
+            grid-template-rows: 100px 1fr 50px; 
             gap: 8px;
         }
 
