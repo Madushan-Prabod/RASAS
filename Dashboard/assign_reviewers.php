@@ -91,7 +91,10 @@ header("Pragma: no-cache");
                                         $query = "SELECT abstract_id, title, keywords FROM abstracts WHERE status = 'submitted'";
                                         $result = mysqli_query($con, $query);
 
-                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        if (mysqli_num_rows($result) == 0) {
+                                            echo '<tr><td colspan="3" class="text-center"><div class="alert alert-danger" role="alert">No submissions to assign reviewers.</div></td></tr>';
+                                        } else {
+                                            while ($row = mysqli_fetch_assoc($result)) {
                                             $abstract_id = $row['abstract_id'];
                                             $keywords = $row['keywords'];
                                             ?>
@@ -141,10 +144,27 @@ header("Pragma: no-cache");
                                                                         "</option>";
                                                                 }
                                                             }
+                                            }
                                                             ?>
                                                         </select>
                                                         <button type="submit" class="btn btn-primary btn-sm"
                                                             name="assign" id="assign">Assign</button>
+                                                        <div id="creativeLoader" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.8); padding:20px; border-radius:5px;">
+                                                            <div class="spinner-border text-danger" role="status">
+                                                                <span class="sr-only" style="display: none;">Loading...</span>
+                                                            </div>
+                                                        </div>
+                                                        <script>
+                                                        document.addEventListener("DOMContentLoaded", function() {
+                                                            const form = document.querySelector('form[action="assign_reviewers.php"]');
+                                                            const loader = document.getElementById("creativeLoader");
+                                                             if (form) {
+                                                                form.addEventListener("submit", function(event) {
+                                                                    loader.style.display = "block";
+                                                                });
+                                                            }
+                                                        });
+                                                        </script>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -192,15 +212,10 @@ header("Pragma: no-cache");
                                                 
                                                 sendEmail($reviewerRow['email'], $subject, $message);
                                                 echo "<div class='alert alert-success'>Reviewer assigned successfully.</div>";
-                                                echo "<div class='d-flex justify-content-center'>
-                                                    <div class='spinner-border text-danger' role='status'>
-                                                        <span class='sr-only'>Loading...</span>
-                                                    </div>
-                                                </div>";
                                                 echo "<script>
                                                     setTimeout(function() {
                                                         window.location.href = 'assign_reviewers.php';
-                                                    });
+                                                    }, 1000);
                                                 </script>";
                                             } else {
                                                 echo "Error: " . mysqli_error($con);

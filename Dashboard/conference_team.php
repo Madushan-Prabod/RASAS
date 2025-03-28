@@ -75,7 +75,7 @@ header("Pragma: no-cache");
                                     <form method="post" action="conference_team.php" enctype="multipart/form-data">
                                         <div class="card shadow mb-4">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Advisory Board</h4>
+                                                <h4 class="modal-title text-danger">Advisory Board</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
@@ -93,25 +93,37 @@ header("Pragma: no-cache");
                                                                 value="<?php echo $row['name']; ?>">
                                                         </div>
                                                         <div class="col-4">
-                                                            <input type="file" name="vc_image"
-                                                                style="background-color: brown; width: 100px; height: 30px;"
-                                                                placeholder="Upload Image" accept="image/*">
-                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                alt="" width="50px" height="50px"
-                                                                style="object-fit: cover;">
+                                                            <div class="input-group mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="vc_image"
+                                                                        class="custom-file-input" id="inputGroupFile02"
+                                                                        accept="image/*"
+                                                                        onchange="document.getElementById('vc_image_label').innerHTML = this.files[0].name">
+                                                                    <label class="custom-file-label" id="vc_image_label"
+                                                                        for="inputGroupFile02">Upload Image</label>
+                                                                </div>
+                                                            </div>
                                                             <input type="hidden" name="before_vc_image"
                                                                 value="<?php echo $row['con_image']; ?>">
                                                         </div>
 
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-10 offset-1">
+                                                        <div class="col-6 offset-1">
                                                             <label for="vc_des">*Additional</label>
                                                             <input type="text" name="vc_des" class="form-control"
                                                                 value="<?php echo $row['description']; ?>">
                                                         </div>
+                                                        <div class="border border-danger offset-1 p-1">
+                                                            <label class="text-muted" for="vc_image">Using
+                                                                Image</label>
+                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                alt="" width="50px" height="50px"
+                                                                style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <hr class="text-danger bg-danger">
                                                 <div class="form-group">
                                                     <label>Deputy Vice Chancellor</label>
                                                     <?php
@@ -127,26 +139,38 @@ header("Pragma: no-cache");
                                                                 value="<?php echo $row['name']; ?>">
                                                         </div>
                                                         <div class="col-4">
-                                                            <input type="file" name="dvc_image"
-                                                                style="background-color: brown; width: 100px; height: 30px;"
-                                                                placeholder="Upload Image" accept="image/*">
-                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                alt="" width="50px" height="50px"
-                                                                style="object-fit: cover;">
+                                                            <div class="input-group mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="dvc_image"
+                                                                        class="custom-file-input" id="inputGroupFile02"
+                                                                        accept="image/*"
+                                                                        onchange="document.getElementById('dvc_image_label').innerHTML = this.files[0].name">
+                                                                    <label class="custom-file-label"
+                                                                        id="dvc_image_label"
+                                                                        for="inputGroupFile02">Upload Image</label>
+                                                                </div>
+                                                            </div>
                                                             <input type="hidden" name="before_dvc_image"
                                                                 value="<?php echo $row['con_image']; ?>">
                                                         </div>
 
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-10 offset-1">
+                                                        <div class="col-6 offset-1">
                                                             <label for="vc_des">*Additional</label>
                                                             <input type="text" name="dvc_des" class="form-control"
                                                                 value="<?php echo $row['description']; ?>">
                                                         </div>
+                                                        <div class="border border-danger offset-1 p-1">
+                                                            <label class="text-muted" for="dvc_image">Using
+                                                                Image</label>
+                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                alt="" width="50px" height="50px"
+                                                                style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                        </div>
                                                     </div>
                                                 </div>
-
+                                                <hr class="text-danger bg-danger">
                                                 <div class="form-group">
                                                     <label>Dean</label>
                                                     <?php
@@ -161,25 +185,37 @@ header("Pragma: no-cache");
                                                                 value="<?php echo $row['name']; ?>">
                                                         </div>
                                                         <div class="col-4">
-                                                            <input type="file" name="dean_image"
-                                                                style="background-color: brown; width: 100px; height: 30px;"
-                                                                placeholder="Upload Image" accept="image/*">
-                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                alt="" width="50px" height="50px"
-                                                                style="object-fit: cover;">
+                                                            <div class="input-group mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="dean_image"
+                                                                        class="custom-file-input" id="inputGroupFile02"
+                                                                        accept="image/*"
+                                                                        onchange="document.getElementById('dean_image_label').innerHTML = this.files[0].name">
+                                                                    <label class="custom-file-label"
+                                                                        id="dean_image_label"
+                                                                        for="inputGroupFile02">Upload Image</label>
+                                                                </div>
+                                                            </div>
                                                             <input type="hidden" name="before_dean_image"
                                                                 value="<?php echo $row['con_image']; ?>">
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-10 offset-1">
+                                                        <div class="col-6 offset-1">
                                                             <label for="vc_des">*Additional</label>
                                                             <input type="text" name="dean_des" class="form-control"
                                                                 value="<?php echo $row['description']; ?>">
                                                         </div>
+                                                        <div class="border border-danger offset-1 p-1">
+                                                            <label class="text-muted" for="dean_image">Using
+                                                                Image</label>
+                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                alt="" width="50px" height="50px"
+                                                                style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                        </div>
                                                     </div>
                                                 </div>
-
+                                                <hr class="text-danger bg-danger">
                                                 <div class="form-group">
                                                     <label>Department Head</label>
                                                     <?php
@@ -195,25 +231,37 @@ header("Pragma: no-cache");
                                                                 value="<?php echo $row['name']; ?>">
                                                         </div>
                                                         <div class="col-4">
-                                                            <input type="file" name="dhead_image"
-                                                                style="background-color: brown; width: 100px; height: 30px;"
-                                                                placeholder="Upload Image" accept="image/*">
-                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                alt="" width="50px" height="50px"
-                                                                style="object-fit: cover;">
-                                                            <input type="hidden" name="before_dhead_image"
-                                                                value="<?php echo $row['con_image']; ?>">
+                                                            <div class="input-group mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="dhead_image"
+                                                                        class="custom-file-input" id="inputGroupFile02"
+                                                                        accept="image/*"
+                                                                        onchange="document.getElementById('dhead_image_label').innerHTML = this.files[0].name">
+                                                                    <label class="custom-file-label"
+                                                                        id="dhead_image_label"
+                                                                        for="inputGroupFile02">Upload Image</label>
+                                                                </div>
+                                                                <input type="hidden" name="before_dhead_image"
+                                                                    value="<?php echo $row['con_image']; ?>">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-10 offset-1">
-                                                            <label for="vc_des">*Additional</label>
-                                                            <input type="text" name="dhead_des" class="form-control"
-                                                                value="<?php echo $row['description']; ?>">
+                                                        <div class="row">
+                                                            <div class="col-6 offset-1">
+                                                                <label for="dhead_des">*Additional</label>
+                                                                <input type="text" name="dhead_des" class="form-control"
+                                                                    value="<?php echo $row['description']; ?>">
+                                                            </div>
+                                                            <div class="border border-danger offset-1 p-1">
+                                                                <label class="text-muted" for="dhead_image">Using
+                                                                    Image</label>
+                                                                <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                    alt="" width="50px" height="50px"
+                                                                    style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                            </div>
                                                         </div>
                                                     </div>
-
-                                                </div>
+                                                <hr class="text-danger bg-danger">
                                                 <div class="form-group">
                                                     <label>Additional Member</label>
                                                     <?php
@@ -228,26 +276,39 @@ header("Pragma: no-cache");
                                                                 value="<?php echo $row['name']; ?>">
                                                         </div>
                                                         <div class="col-4">
-                                                            <input type="file" name="amember1_image"
-                                                                style="background-color: brown; width: 100px; height: 30px;"
-                                                                placeholder="Upload Image" accept="image/*">
-                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                alt="" width="50px" height="50px"
-                                                                style="object-fit: cover;">
+                                                            <div class="input-group mb-3">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="amember1_image"
+                                                                        class="custom-file-input" id="inputGroupFile02"
+                                                                        accept="image/*"
+                                                                        onchange="document.getElementById('amember1_image_label').innerHTML = this.files[0].name">
+                                                                    <label class="custom-file-label"
+                                                                        id="amember1_image_label"
+                                                                        for="inputGroupFile02">Upload Image</label>
+                                                                </div>
+                                                            </div>
                                                             <input type="hidden" name="before_amember1_image"
                                                                 value="<?php echo $row['con_image']; ?>">
                                                         </div>
 
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-10 offset-1">
+                                                        <div class="col-6 offset-1">
                                                             <label for="vc_des">*Additional</label>
                                                             <input type="text" name="amember1_des" class="form-control"
                                                                 value="<?php echo $row['description']; ?>">
                                                         </div>
+                                                        <div class="border border-danger offset-1 p-1">
+                                                            <label class="text-muted" for="amember1_image">Using
+                                                                Image</label>
+                                                            <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                alt="" width="50px" height="50px"
+                                                                style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                        </div>
                                                     </div>
-
-
+                                                    
+                                                    <hr class="text-danger bg-danger">
+                                                
                                                     <div class="form-group">
                                                         <label>Additional Member</label>
                                                         <?php
@@ -262,34 +323,49 @@ header("Pragma: no-cache");
                                                                     value="<?php echo $row['name']; ?>">
                                                             </div>
                                                             <div class="col-4">
-                                                                <input type="file" name="amember2_image"
-                                                                    style="background-color: brown; width: 100px; height: 30px;"
-                                                                    placeholder="Upload Image" accept="image/*">
-                                                                <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
-                                                                    alt="" width="50px" height="50px"
-                                                                    style="object-fit: cover;">
+                                                                <div class="input-group mb-3">
+                                                                    <div class="custom-file">
+                                                                        <input type="file" name="amember2_image"
+                                                                            class="custom-file-input"
+                                                                            id="inputGroupFile02" accept="image/*"
+                                                                            onchange="document.getElementById('amember2_image_label').innerHTML = this.files[0].name">
+                                                                        <label class="custom-file-label"
+                                                                            id="amember2_image_label"
+                                                                            for="inputGroupFile02">Upload Image</label>
+                                                                    </div>
+                                                                </div>
                                                                 <input type="hidden" name="before_amember2_image"
                                                                     value="<?php echo $row['con_image']; ?>">
                                                             </div>
                                                         </div>
 
                                                         <div class="row">
-                                                            <div class="col-10 offset-1">
+                                                            <div class="col-6 offset-1">
                                                                 <label for="vc_des">*Additional</label>
                                                                 <input type="text" name="amember2_des"
                                                                     class="form-control"
                                                                     value="<?php echo $row['description']; ?>">
                                                             </div>
+                                                            <div class="border border-danger offset-1 p-1">
+                                                                <label class="text-muted" for="amember2_image">Using
+                                                                    Image</label>
+                                                                <img src="./profile_pic_contact/<?php echo $row['con_image']; ?>"
+                                                                    alt="" width="50px" height="50px"
+                                                                    style="object-fit: cover; border-radius: 50%; border: 2px solid #007BFF; box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);">
+                                                            </div>
                                                         </div>
 
                                                     </div>
-                                                </div>
+                                                
                                                 <div class="modal-footer">
                                                     <input type="submit" name="update_advisory" class="btn btn-success"
                                                         value="Update">
                                                     <input type="button" value="Cancel" class="btn btn-danger"
                                                         data-dismiss="modal">
                                                 </div>
+
+                                            </div>
+                                        
 
                                                 <?php
                                                 if (isset($_POST['update_advisory'])) {
@@ -422,7 +498,7 @@ header("Pragma: no-cache");
                                     <form method="post" action="conference_team.php" enctype="multipart/form-data">
                                         <div class="card shadow mb-4">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Organizing Committee</h4>
+                                                <h4 class="modal-title text-danger">Organizing Committee</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">

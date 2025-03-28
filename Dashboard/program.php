@@ -120,9 +120,13 @@ header("Pragma: no-cache");
                                 $stmt->bind_param("sssi", $program[0], $program[1], $program[2], $program[3]);
                                 $stmt->execute();
                             }
-
-                            echo '<div style="position: fixed; top: 0; right: 0;" class="alert alert-success" role="alert">Program details updated successfully!</div>';
                             $stmt->close();
+                            echo '<div style="position: fixed; top: 0; right: 0;" class="alert alert-success" role="alert">Program details updated successfully!</div>';
+                            echo "<script>
+                                setTimeout(function() {
+                                    window.location.href='program.php';
+                                }, 1000);
+                            </script>";
                         }
 
                         ?>

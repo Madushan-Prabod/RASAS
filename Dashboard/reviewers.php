@@ -1,6 +1,6 @@
 <?php
 
-$conn = require 'db.php';
+$con = require 'db.php';
 
 session_start();
 if (!isset($_SESSION['user_id'])) {

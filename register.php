@@ -1,5 +1,5 @@
 <?php
-$conn = require 'db.php';
+require 'db.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +9,10 @@ $conn = require 'db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register | Ruhuna Arts Student's Annual Sessions</title>
-    <meta name="keywords" content="RASAS, Ruhuna Arts Student's Annual Sessions, University of Ruhuna, Humanities and Social Sciences">
-    <meta name="description" content="Organizes its first student sessions with the aim of creating a platform for the budding researchers in the field of Humanities and Social Sciences">
+    <meta name="keywords"
+        content="RASAS, Ruhuna Arts Student's Annual Sessions, University of Ruhuna, Humanities and Social Sciences">
+    <meta name="description"
+        content="Organizes its first student sessions with the aim of creating a platform for the budding researchers in the field of Humanities and Social Sciences">
     <link rel="icon" href="asserts/images/hss.png" type="image/x-icon">
     <link rel="stylesheet" href="asserts/css/bootstrap.css">
     <link rel="stylesheet" href="asserts/css/main.css">
@@ -145,6 +147,8 @@ $conn = require 'db.php';
             padding-bottom: 13%;
             height: 130% !important;
         }
+
+
 
         @media (max-width: 767px) {
             .nav {
@@ -493,6 +497,23 @@ $conn = require 'db.php';
                                     style="background-color: #A52A2A; color: #FFBA00; font-weight: bolder;">Reset</button>
                             </div>
                         </div>
+
+                        <div id="creativeLoader" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.8); padding:20px; border-radius:5px;">
+                            <div class="spinner-border text-danger" role="status">
+                                <span class="sr-only" style="display: none;">Loading...</span>
+                            </div>
+                        </div>
+                        <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            const form = document.querySelector('form[action="register.php"]');
+                            const loader = document.getElementById("creativeLoader");
+                             if (form) {
+                                form.addEventListener("submit", function(event) {
+                                    loader.style.display = "block";
+                                });
+                            }
+                        });
+                        </script>
                 </div>
 
                 <!--PHP code to insert data into the database-->
@@ -526,18 +547,18 @@ $conn = require 'db.php';
                         $query = "INSERT INTO users (full_name, email, password_hash, phone, address, university, department) 
                         VALUES ('$full_name', '$email', '$password_hash', '$phone', '$address', '$university', '$department')";
 
-                        if (mysqli_query($con, $query)) {                            
+                        if (mysqli_query($con, $query)) {
                             // Send confirmation email
                             sendEmail($email, $password);
                             echo "<div style='position: absolute; top: 0; right: 0;' class='alert alert-success alert-dismissible fade show' role='alert'>Registration Successful! Please <a href='login.php' class='alert-link'>Login here</a>.<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-                            echo "<script>setTimeout(\"location.href = 'login.php';\",50);</script>";
+                            echo "<script>setTimeout(\"location.href = 'login.php';\", 1000);</script>";
                         } else {
                             echo "<div style='position: absolute; top: 0; right: 0;' class='alert alert-danger alert-dismissible fade show' role='alert'>Registration failed.<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
                         }
                     }
                 }
 
-                // Function to send email
+                //Function to send email
                 function sendEmail($toEmail, $password)
                 {
                     $mail = new PHPMailer(true);
@@ -591,28 +612,7 @@ $conn = require 'db.php';
                 }
                 ?>
                 </form>
-                <!-- loader
-                <div id="creativeLoader" class="text-center"
-                    style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.9); padding:20px; border-radius:5px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-                    <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-                <script>
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const form = document.querySelector('form[action="register.php"]');
-                        const loader = document.getElementById("creativeLoader");
 
-                        if (form) {
-                            form.addEventListener("submit", function (event) {
-                                loader.style.display = "block";
-                                setTimeout(() => {
-                                    loader.style.display = "none"; // Hide loader after 3 seconds
-                                }, 3000);
-                            });
-                        }
-                    });
-                </script> -->
                 </fieldset>
             </div>
         </div>

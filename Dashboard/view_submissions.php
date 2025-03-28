@@ -166,10 +166,27 @@ header("Pragma: no-cache");
                                                     </select>
 
                                                     <p><button type="submit" name="UpdateStatus" title="Update Status"
-                                                            class="btn bg-primary btn-sm text-light"
+                                                            class="btn bg-success btn-sm text-light"
                                                             style="margin-top: 4px; padding : 8px;"><i
                                                                 class="fas fa-fw fa-save"></i> Update Status</button>
                                                     </p>
+                                                    <div id="creativeLoader" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.8); padding:20px; border-radius:5px;">
+                                                        <div class="spinner-border text-danger" role="status">
+                                                            <span class="sr-only" style="display: none;">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        document.addEventListener("DOMContentLoaded", function() {
+                                                            const form = document.querySelector('form[action="view_submissions.php"]');
+                                                            const loader = document.getElementById("creativeLoader");
+                                                            if (form) {
+                                                                form.addEventListener("submit", function(event) {
+                                                                    loader.style.display = "block";
+                                                                });
+                                                            }
+                                                        });
+                                                    </script>
+                                                    
                                                     <?php
                                                     if (isset($_POST['UpdateStatus'])) {
                                                         $abstract_id = $_POST['abstract_id'];
@@ -225,7 +242,7 @@ header("Pragma: no-cache");
                                                             sendEmail($email, $subject, $message);
                                                             echo "<div class='alert alert-success'>Comment submitted successfully.</div>";
                                                             echo "<div class='alert alert-success'>Status updated successfully.</div>";
-                                                            echo "<script>setTimeout(\"location.href = 'view_submissions.php';\",);</script>";
+                                                            echo "<script>setTimeout(\"location.href = 'view_submissions.php';\", 2000);</script>";
                                                         } else {
                                                             echo "<div class='alert alert-danger'>Comment submission failed.</div>";
                                                             echo "<div class='alert alert-danger'>Status update failed.</div>";
@@ -344,6 +361,7 @@ header("Pragma: no-cache");
                                             <th>Title</th>
                                             <th>Submisson Date</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
 
@@ -366,7 +384,15 @@ header("Pragma: no-cache");
                                                 <td><?php echo $row['title']; ?></td>
                                                 <td><?php echo date('d-m-Y', strtotime($row['submit_date'])); ?></td>
                                                 <td style="text-transform: capitalize"><?php echo $row['status']; ?></td>
-
+                                                <td>
+                                                    <form method="get" action="view_submission.php">
+                                                    <a href="view_pdf.php?id=<?php echo $row['abstract_id']; ?>"
+                                                            class="btn btn-danger btn-sm" title="View" data-toggle="tooltip"
+                                                            target="_blank"
+                                                            style="padding : 8px;">&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                                                class="fas fa-fw fa-eye"></i>&nbsp; View Abstract &nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                                    </form>
+                                                </td>
 
                                             </tr>
                                         <?php } ?>

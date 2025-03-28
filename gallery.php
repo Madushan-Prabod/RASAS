@@ -408,8 +408,8 @@ include('db.php');
                     ?>
 
                     <p class="text-center m-lg-4 border border-info fw-bold">The Faculty of Humanities and Social
-                        Sciences organized the 8th Ruhuna Art Students' Annual
-                        Sessions (RASAS 2024) on <?php echo $session; ?>th August 2024 to enhance the explorative and analytical skills of its
+                        Sciences organized the <?php echo "$session".'<sup>th</sup>' ?> Ruhuna Arts Students' Annual
+                        Sessions (RASAS <?php echo date('Y'); ?>) on <?php echo date('F jS, Y', strtotime($row['event_date'])); ?> to enhance the explorative and analytical skills of its
                         sprouting scholars.</p>
                 </div>
             </div>

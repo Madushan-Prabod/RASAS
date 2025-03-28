@@ -79,41 +79,71 @@ header("Pragma: no-cache");
                                     </div>
                                     <div class="form-group">
                                         <label for="abstract">Abstract</label>
-                                        <input type="file" class="form-control" id="abstract" name="content" accept=".pdf" required>
-                                        <small id="fileHelp" class="form-text text-muted">Please upload your abstract in PDF format.</small>
+                                        <input type="file" class="form-control" id="abstract" name="content"
+                                            accept=".pdf" required>
+                                        <small id="fileHelp" class="form-text text-muted">Please upload your abstract in
+                                            PDF format.</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="Extended Abstracts">Extended Abstracts</label>
-                                        <input type="file" class="form-control" id="extended_abstracts" name="extended_abstracts" accept=".pdf" required>
-                                        <small id="fileHelp" class="form-text text-muted">Please upload your extended abstract in PDF format.</small>
+                                        <input type="file" class="form-control" id="extended_abstracts"
+                                            name="extended_abstracts" accept=".pdf" required>
+                                        <small id="fileHelp" class="form-text text-muted">Please upload your extended
+                                            abstract in PDF format.</small>
                                     </div>
                                     <input type="hidden" name="conference_id" value="1">
                                     <div class="form-group">
                                         <label for="author">Author</label>
-                                        <input type="text" class="form-control" id="author" name="author" required disabled value="<?php echo $row['full_name']; ?>">
+                                        <input type="text" class="form-control" id="author" name="author" required
+                                            disabled value="<?php echo $row['full_name']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="theme">Choose Theme</label>
                                         <select class="form-control keywords" id="theme" name="theme" required>
                                             <option value="" disabled selected>Select a Theme</option>
-                                            <option value="Society, culture and education">Society, culture and education</option>
-                                            <option value="Democracy, governance and Social movements">Democracy, governance and Social movements</option>
+                                            <option value="Society, culture and education">Society, culture and
+                                                education</option>
+                                            <option value="Democracy, governance and Social movements">Democracy,
+                                                governance and Social movements</option>
                                             <option value="Gender and women studies">Gender and women studies</option>
-                                            <option value="Language and literacy studies">Language and literacy studies</option>
+                                            <option value="Language and literacy studies">Language and literacy studies
+                                            </option>
                                             <option value="Aesthetics and Folklore">Aesthetics and Folklore</option>
-                                            <option value="Social work, Psychology and counseling">Social work, Psychology and counseling</option>
-                                            <option value="Religion, politics and secularism">Religion, politics and secularism</option>
-                                            <option value="Archaeology, History and Heritage">Archaeology, History and Heritage</option>
-                                            <option value="Health, illness and society">Health, illness and society</option>
-                                            <option value="Economy, Poverty and sustainable Development">Economy, Poverty and sustainable Development</option>
-                                            <option value="Technology, media and social transformation">Technology, media and social transformation</option>
-                                            <option value="Population, environment and disaster management">Population, environment and disaster management</option>
+                                            <option value="Social work, Psychology and counseling">Social work,
+                                                Psychology and counseling</option>
+                                            <option value="Religion, politics and secularism">Religion, politics and
+                                                secularism</option>
+                                            <option value="Archaeology, History and Heritage">Archaeology, History and
+                                                Heritage</option>
+                                            <option value="Health, illness and society">Health, illness and society
+                                            </option>
+                                            <option value="Economy, Poverty and sustainable Development">Economy,
+                                                Poverty and sustainable Development</option>
+                                            <option value="Technology, media and social transformation">Technology,
+                                                media and social transformation</option>
+                                            <option value="Population, environment and disaster management">Population,
+                                                environment and disaster management</option>
                                             <option value="Tourism and Hospitality">Tourism and Hospitality</option>
                                         </select>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                                    <button type="submit" class="btn btn-success" name="submit" onclick="showLoader()">Submit</button>
+                        
+                                    <div id="creativeLoader"
+                                        style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.8); padding:20px; border-radius:5px;">
+                                        <div class="spinner-border text-danger" role="status">
+                                            <span class="sr-only" style="display: none;">Loading...</span>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function showLoader() {
+                                            const loader = document.getElementById("creativeLoader");
+                                            loader.style.display = "block";
+                                        }
+                                    </script>
+
                                 </form>
-                                <?php	
+                                <?php
 
                                 if (isset($_POST['submit'])) {
                                     $user_id = $_SESSION['user_id'];
@@ -134,18 +164,18 @@ header("Pragma: no-cache");
                                     <p>Title: ' . $title . '</p>
                                     <p>Author: ' . $row['full_name'] . '</p>
                                     <p>Theme: ' . $theme . '</p>
-                                    <p>Submission Date: '. $submission_date. '</p>
+                                    <p>Submission Date: ' . $submission_date . '</p>
                                     </body>
                                     </html>';
 
-                                    
+
                                     if (!file_exists('abstracts')) {
                                         mkdir('abstracts', 0777, true);
                                     }
                                     if (!file_exists('extended_abstracts')) {
                                         mkdir('extended_abstracts', 0777, true);
                                     }
-                                    
+
                                     $file_extension = pathinfo($content, PATHINFO_EXTENSION);
                                     $file_extension = pathinfo($extended_abstracts, PATHINFO_EXTENSION);
                                     $content = $title . '.' . $file_extension;
@@ -160,7 +190,7 @@ header("Pragma: no-cache");
                                                   VALUES ('$user_id', '$conference_id', '$title', '$target_file', '$extended_abstracts', '$theme', '$status', '$submission_date', '$assign_date')";
                                         if (mysqli_query($con, $query)) {
                                             echo "<div style='position: absolute; top: 0; right: 0;' class='alert alert-success alert-dismissible fade show' role='alert'>Successfully Submitted!</div>";
-                                            echo "<script>setTimeout(\"location.href = 'submit_abstract.php';\",2500);</script>";
+                                            echo "<script>setTimeout(\"location.href = 'submit_abstract.php';\",1500);</script>";
                                         } else {
                                             echo "<div class='alert alert-danger'>Error: " . mysqli_error($con) . "</div>";
                                         }
@@ -168,14 +198,14 @@ header("Pragma: no-cache");
                                         echo "<div style='position: absolute; top: 0; right: 0;' class='alert alert-danger alert-dismissible fade show' role='alert'>Submission Failed!</div>";
                                     }
 
-                                    
+
                                 }
                                 ?>
                             </div>
 
-                        <!-- /.container-fluid -->
+                            <!-- /.container-fluid -->
 
-                    </div>
+                        </div>
                     </div>
                     <br>
                     <!-- End of Main Content -->
@@ -203,26 +233,29 @@ header("Pragma: no-cache");
                                         $user_id = $_SESSION['user_id'];
                                         $get_abstracts = "SELECT * FROM abstracts WHERE user_id='$user_id'";
                                         $abstracts = mysqli_query($con, $get_abstracts);
-                                        while ($row = mysqli_fetch_array($abstracts)) {
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $row['title']; ?></td>
-                                            <td><?php echo $row['keywords']; ?></td>
-                                            <td><?php echo $row['submit_date']; ?></td>
-                                            <td style="text-transform : capitalize">
-                                                <?php 
-                                                $status = $row['status'];
-                                                if ($status == 'accepted_minor') {
-                                                    echo 'Accepted with Minor Corrections';
-                                                } else if ($status == 'accepted_major') {
-                                                    echo 'Accepted with Major Corrections';
-                                                } else {
-                                                    echo $status;
-                                                } 
-                                                ?>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
+                                        if (mysqli_num_rows($abstracts) == 0) {
+                                        echo "<tr><td colspan='4' class='text-center'><div class='alert alert-danger' role='alert'>You have not submitted any abstracts yet!</div></td></tr>";
+                                        } else {
+                                            while ($row = mysqli_fetch_array($abstracts)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['keywords']; ?></td>
+                                                <td><?php echo $row['submit_date']; ?></td>
+                                                <td style="text-transform : capitalize">
+                                                    <?php
+                                                    $status = $row['status'];
+                                                    if ($status == 'accepted_minor') {
+                                                        echo 'Accepted with Minor Corrections';
+                                                    } else if ($status == 'accepted_major') {
+                                                        echo 'Accepted with Major Corrections';
+                                                    } else {
+                                                        echo $status;
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php } }?>
                                     </tbody>
                                 </table>
                             </div>

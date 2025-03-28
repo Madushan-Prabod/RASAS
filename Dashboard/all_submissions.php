@@ -134,6 +134,7 @@ header("Pragma: no-cache");
                                             <th>Title</th>
                                             <th>Keywords</th>
                                             <th>Submisson Date</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
 
                                         </tr>

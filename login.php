@@ -9,8 +9,10 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Ruhuna Arts Student's Annual Sessions</title>
-    <meta name="keywords" content="RASAS, Ruhuna Arts Student's Annual Sessions, University of Ruhuna, Humanities and Social Sciences">
-    <meta name="description" content="Organizes its first student sessions with the aim of creating a platform for the budding researchers in the field of Humanities and Social Sciences">
+    <meta name="keywords"
+        content="RASAS, Ruhuna Arts Student's Annual Sessions, University of Ruhuna, Humanities and Social Sciences">
+    <meta name="description"
+        content="Organizes its first student sessions with the aim of creating a platform for the budding researchers in the field of Humanities and Social Sciences">
     <link rel="icon" href="asserts/images/hss.png" type="image/x-icon">
     <link rel="stylesheet" href="asserts/css/bootstrap.css">
     <link rel="stylesheet" href="asserts/css/main.css">
@@ -371,6 +373,23 @@ session_start();
                             <!-- Submit button -->
                             <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block" name="login"
                                 style="background-color: #A52A2A; color: #FFBA00; font-weight: bolder;">Log in</button>
+
+                            <div id="creativeLoader" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:rgba(255,255,255,0.8); padding:20px; border-radius:5px;">
+                                <div class="spinner-border text-danger" role="status">
+                                    <span class="sr-only" style="display: none;">Loading...</span>
+                                </div>
+                            </div>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    const form = document.querySelector('form[action="login.php"]');
+                                    const loader = document.getElementById("creativeLoader");
+                                    if (form) {
+                                        form.addEventListener("submit", function(event) {
+                                            loader.style.display = "block";
+                                        });
+                                    }
+                                });
+                            </script>
                             <!--php code-->
                             <?php
                             if (isset($_POST['login'])) {
@@ -400,11 +419,11 @@ session_start();
                                         // Redirect based on role
                                         $role = $row['role'];
                                         if ($role == 'admin') {
-                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_admin.php';\", 1500);</script>";
+                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_admin.php';\", 1000);</script>";
                                         } elseif ($role == 'reviewer') {
-                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_reviewer.php';\", 1500);</script>";
+                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_reviewer.php';\", 1000);</script>";
                                         } else {
-                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_user.php';\", 1500);</script>";
+                                            echo "<script>setTimeout(\"location.href = 'Dashboard/dashboard_user.php';\", 1000);</script>";
                                         }
                                     } else {
                                         echo "<div class='alert alert-danger'>Invalid Password. Please try again.</div>";

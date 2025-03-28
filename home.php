@@ -1031,7 +1031,7 @@ $row = mysqli_fetch_assoc($result);
             <div class="footer-content text-center" style="position: relative; z-index: 30;">
                 <p>&copy; <?php echo date('Y'); ?> Ruhuna Arts Student's Annual Sessions. All rights reserved.</p>
             </div>
-        </foot>
+        </div>
     </div>
         
     </section>
