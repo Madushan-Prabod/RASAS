@@ -63,13 +63,11 @@ header("Pragma: no-cache");
                     <div class="row">
                         <div class="col-9">
                             <h1 class="h3 mb-2 text-gray-800">All Submissions</h1>
-
                         </div>
                     </div>
                     <!-- Page Heading -->
 
                     <div class="card shadow mb-4">
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -106,7 +104,7 @@ header("Pragma: no-cache");
                                                 <td style="text-transform: capitalize"><?php echo $row['status']; ?></td>
                                                 <td>
                                                     <p>
-                                                        <a href="view_pdf.php?id=<?php echo $row['abstract_id']; ?>" class="btn btn-info btn-sm" title="View" data-toggle="tooltip" target="_blank"><i class="fas fa-fw fa-eye"></i> View &nbsp;&nbsp;</a>
+                                                        <a href="view_pdf.php?id=<?php echo $row['abstract_id']; ?>" class="btn btn-info btn-sm" title="View" data-toggle="tooltip" target="_blank"><i class="fas fa-fw fa-eye"></i> View Abstract &nbsp;&nbsp;</a>
                                                     </p>
                                                 </td>
 
@@ -119,6 +117,69 @@ header("Pragma: no-cache");
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-9">
+                            <h1 class="h3 mb-2 text-gray-800">Accepted Submissions</h1>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Abstract Id</th>
+                                            <th>Author Email</th>
+                                            <th>Title</th>
+                                            <th>Keywords</th>
+                                            <th>Submisson Date</th>
+                                            <th>Actions</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+
+                                            <?php
+                                            $user_id = $_SESSION['user_id'];
+                                            $all_submissions = "SELECT abstracts.*, users.email FROM abstracts INNER JOIN users ON abstracts.user_id = users.user_id WHERE abstracts.status = 'accepted'";
+                                            $objects = mysqli_query($con, $all_submissions);
+                                            while ($row = mysqli_fetch_array($objects)) {
+                                                ?>
+
+                                                <td><?php echo $row['abstract_id']; ?></td>
+                                                <td><?php echo $row['email']; ?></td>
+                                                <td><?php echo $row['title']; ?></td>
+                                                <td><?php echo $row['keywords']; ?></td>
+                                                <td><?php echo $row['submit_date']; ?></td>
+                                                <td style="text-transform: capitalize"><?php echo $row['status']; ?></td>
+                                                <td>
+                                                    <p>
+                                                        <?php if ($row['rev_pdf_file'] != null) { ?>
+                                                            <a href="view_resubmit_pdf.php?id=<?php echo $row['abstract_id']; ?>" class="btn btn-danger btn-sm" title="View" data-toggle="tooltip" target="_blank"><i class="fas fa-fw fa-eye"></i>&nbsp;&nbsp; View Abstract  &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                                        <?php } else { ?>
+                                                            <a href="view_pdf.php?id=<?php echo $row['abstract_id']; ?>" class="btn btn-info btn-sm" title="View" data-toggle="tooltip" target="_blank"><i class="fas fa-fw fa-eye"></i>&nbsp;&nbsp; View Abstract &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                                        <?php } ?>
+                                                    </p>
+                                                    <p>
+                                                        <a href="view_ex_abstract.php?id=<?php echo $row['abstract_id']; ?>" class="btn btn-info btn-sm" title="View" data-toggle="tooltip" target="_blank"><i class="fas fa-fw fa-eye"></i> View Extended Abs.</a>
+                                                    </p>
+                                                </td>
+
+
+                                            </tr>
+                                        <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
 
                 </div>
                 <!-- /.container-fluid -->
